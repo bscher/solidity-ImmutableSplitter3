@@ -1,15 +1,12 @@
 {
-    "name": "eth-todo-list",
+    "name": "mutable-splitter-contract",
     "version": "1.0.0",
-    "description": "Blockchain Todo List Powered By Ethereum",
+    "description": "",
     "main": "truffle-config.js",
     "directories": {
         "test": "test"
     },
-    "scripts": {
-        "dev": "lite-server",
-        "test": "echo \"Error: no test specified\" && sexit 1"
-    },
+    "scripts": {},
     "author": "github.com/bscher",
     "license": "ISC",
     "devDependencies": {
