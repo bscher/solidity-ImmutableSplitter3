@@ -6,7 +6,10 @@
     "directories": {
         "test": "test"
     },
-    "scripts": {},
+    "scripts": {
+        "redeploy": "truffle migrate --reset",
+        "test": "truffle test"
+    },
     "author": "github.com/bscher",
     "license": "ISC",
     "devDependencies": {

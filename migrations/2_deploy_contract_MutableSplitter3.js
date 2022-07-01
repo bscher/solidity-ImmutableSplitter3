@@ -1,5 +1,5 @@
-var MutableSplitter3 = artifacts.require("./MutableSplitter3.sol");
+var ImmutableSplitter3 = artifacts.require("./ImmutableSplitter3.sol");
 
 module.exports = function (deployer, _, accounts) {
-    deployer.deploy(MutableSplitter3, accounts[1], accounts[2], accounts[3]);
+    deployer.deploy(ImmutableSplitter3, accounts[1], accounts[2], accounts[3]);
 };

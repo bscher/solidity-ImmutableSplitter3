@@ -1,6 +1,6 @@
 const { assert } = require("chai");
 
-const MutableSplitter3 = artifacts.require('./MutableSplitter3.sol');
+const ImmutableSplitter3 = artifacts.require('./ImmutableSplitter3.sol');
 
 function assertNotAnEmptyAddress(address) {
     assert.notEqual(address, 0x0);
@@ -9,17 +9,17 @@ function assertNotAnEmptyAddress(address) {
     assert.notEqual(address, undefined);
 }
 
-contract('MutableSplitter3', (accounts) => {
+contract('ImmutableSplitter3', (accounts) => {
     before(async () => {
-        this.splitter = await MutableSplitter3.deployed();
+        this.splitter = await ImmutableSplitter3.deployed();
     });
 
-    it('deploys successfully', async () => {
+    it('has been deployed successfully', async () => {
         const address = await this.splitter.address;
         assertNotAnEmptyAddress(address);
     });
 
-    it('checks recipient addresses are not empty', async () => {
+    it('only allows recipient addresses that are not empty', async () => {
         const recA = await this.splitter.recipient_A();
         assertNotAnEmptyAddress(recA);
 
@@ -28,34 +28,6 @@ contract('MutableSplitter3', (accounts) => {
 
         const recC = await this.splitter.recipient_C();
         assertNotAnEmptyAddress(recC);
-    });
-
-    it('can set new recipients', async () => {
-
-        const recA_orig = await this.splitter.recipient_A();
-        const recB_orig = await this.splitter.recipient_B();
-        const recC_orig = await this.splitter.recipient_C();
-
-        const result = await this.splitter.setNewRecipients(
-            recC_orig, recA_orig, recB_orig
-        );
-
-        assert.equal(result.logs[0].args.prevAddress, recA_orig);
-        assert.equal(result.logs[0].args.newAddress, recC_orig);
-
-        assert.equal(result.logs[1].args.prevAddress, recB_orig);
-        assert.equal(result.logs[1].args.newAddress, recA_orig);
-
-        assert.equal(result.logs[2].args.prevAddress, recC_orig);
-        assert.equal(result.logs[2].args.newAddress, recB_orig);
-
-        const recA_new = await this.splitter.recipient_A();
-        const recB_new = await this.splitter.recipient_B();
-        const recC_new = await this.splitter.recipient_C();
-
-        assert.equal(recA_new, recC_orig);
-        assert.equal(recB_new, recA_orig);
-        assert.equal(recC_new, recB_orig);
     });
 
     it('can split funds equally among recipients when funds are received', async () => {
