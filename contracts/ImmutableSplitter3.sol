@@ -1,5 +1,9 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+///
+// Evenly split funds between 3 immutably defined people.
+///
 contract ImmutableSplitter3 {
     address public owner;
 
